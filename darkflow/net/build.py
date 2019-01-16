@@ -181,5 +181,4 @@ class TFNet(object):
 		with tf.gfile.GFile(pb_path, 'wb') as f:
 				f.write(self.sess.graph.as_graph_def(add_shapes=True).SerializeToString())
 		ckpt_path = './{}.ckpt'.format(self.meta['name'])
-		self.saver.save(self.sess, ckpt_path, write_meta_graph=False)
-		self.saver.export_meta_graph(ckpt_path+'.meta', clear_devices=True, clear_extraneous_savers=True)
+		self.saver.save(self.sess, ckpt_path)
