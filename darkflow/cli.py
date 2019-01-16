@@ -38,4 +38,8 @@ def cliHandler(args):
         print('Rebuild a constant version ...')
         tfnet.savepb(); exit('Done')
 
+    if FLAGS.saveckpt:
+        print('Rebuild a constant version ...')
+        tfnet.saveckpt(); exit('Done')
+
     tfnet.predict()

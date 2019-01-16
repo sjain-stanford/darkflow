@@ -175,3 +175,11 @@ class TFNet(object):
 		self.say('Saving const graph def to {}'.format(name))
 		graph_def = tfnet_pb.sess.graph_def
 		tf.train.write_graph(graph_def,'./', name, False)
+
+	def saveckpt(self):
+		pb_path = './{}.pb'.format(self.meta['name'])
+		with tf.gfile.GFile(pb_path, 'wb') as f:
+				f.write(self.sess.graph.as_graph_def(add_shapes=True).SerializeToString())
+		ckpt_path = './{}.ckpt'.format(self.meta['name'])
+		self.saver.save(self.sess, ckpt_path, write_meta_graph=False)
+		self.saver.export_meta_graph(ckpt_path+'.meta', clear_devices=True, clear_extraneous_savers=True)
